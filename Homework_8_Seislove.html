@@ -455,11 +455,11 @@ pre code {
 </div>
 <div id="bmi-calculation-categorization" class="section level1">
 <h1>BMI Calculation &amp; Categorization</h1>
-<pre class="r"><code>StudentSurvey &lt;- StudentSurvey %&gt;% mutate(
+<pre class="r"><code>StudentBMI &lt;- StudentSurvey %&gt;% mutate(
   BMI = 701 * Weight / (Height)^2,
 ) %&gt;% select(Sex, Height, Weight, BMI)
 
-head(StudentSurvey) %&gt;% kable()</code></pre>
+head(StudentBMI) %&gt;% kable()</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -509,13 +509,13 @@ head(StudentSurvey) %&gt;% kable()</code></pre>
 </tbody>
 </table>
 <p><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<pre class="r"><code>StudentSurvey &lt;- StudentSurvey %&gt;% mutate(
+<pre class="r"><code>StudentBMI &lt;- StudentBMI %&gt;% mutate(
   Category = cut(
     BMI, c(-Inf, 18.5, 24.9, 29.9, Inf), labels = c(&quot;Underweight&quot;, &quot;Healthy Weight&quot;, &quot;Overweight&quot;, &quot;Obese&quot;)
   )
 )
 
-head(StudentSurvey) %&gt;% kable()</code></pre>
+head(StudentBMI) %&gt;% kable()</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -573,11 +573,94 @@ head(StudentSurvey) %&gt;% kable()</code></pre>
 </table>
 <p><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 </div>
+<div id="highest-and-lowest-bmis" class="section level1">
+<h1>Highest and Lowest BMIs</h1>
+<pre class="r"><code>StudentBMI %&gt;% group_by(Sex) %&gt;% 
+  summarize(Low = min(BMI, na.rm = TRUE), High = max(BMI, na.rm = TRUE)) %&gt;% 
+  kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Sex</th>
+<th align="right">Low</th>
+<th align="right">High</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">F</td>
+<td align="right">13.22833</td>
+<td align="right">35.05000</td>
+</tr>
+<tr class="even">
+<td align="left">M</td>
+<td align="right">17.30864</td>
+<td align="right">41.50542</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+</div>
+<div id="sat-scores" class="section level1">
+<h1>SAT Scores</h1>
+<pre class="r"><code>StudentSAT &lt;- StudentSurvey %&gt;% 
+  mutate(Higher = case_when(
+    VerbalSAT &gt; MathSAT ~ &quot;Verbal&quot;,
+    VerbalSAT &lt; MathSAT ~ &quot;Math&quot;,
+    VerbalSAT == MathSAT ~ &quot;Equal&quot;
+  ), .keep = &quot;used&quot;)
+
+head(StudentSAT) %&gt;% kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">VerbalSAT</th>
+<th align="right">MathSAT</th>
+<th align="left">Higher</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">540</td>
+<td align="right">670</td>
+<td align="left">Math</td>
+</tr>
+<tr class="even">
+<td align="right">520</td>
+<td align="right">630</td>
+<td align="left">Math</td>
+</tr>
+<tr class="odd">
+<td align="right">550</td>
+<td align="right">560</td>
+<td align="left">Math</td>
+</tr>
+<tr class="even">
+<td align="right">490</td>
+<td align="right">630</td>
+<td align="left">Math</td>
+</tr>
+<tr class="odd">
+<td align="right">720</td>
+<td align="right">450</td>
+<td align="left">Verbal</td>
+</tr>
+<tr class="even">
+<td align="right">600</td>
+<td align="right">550</td>
+<td align="left">Verbal</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+</div>
 <div class="footnotes footnotes-end-of-document">
 <hr />
 <ol>
 <li id="fn1"><p>Problem 1 Complete<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>Problem 2 Complete<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Problem 3 Complete<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Problem 4 Complete<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

@@ -24,24 +24,48 @@ StudentSurvey <- Lock5Data::StudentSurvey
 # BMI Calculation & Categorization
 
 ```{r}
-StudentSurvey <- StudentSurvey %>% mutate(
+StudentBMI <- StudentSurvey %>% mutate(
   BMI = 701 * Weight / (Height)^2,
 ) %>% select(Sex, Height, Weight, BMI)
 
-head(StudentSurvey) %>% kable()
+head(StudentBMI) %>% kable()
 ```
 
 ^[Problem 1 Complete]
 
 ```{r}
-StudentSurvey <- StudentSurvey %>% mutate(
+StudentBMI <- StudentBMI %>% mutate(
   Category = cut(
     BMI, c(-Inf, 18.5, 24.9, 29.9, Inf), labels = c("Underweight", "Healthy Weight", "Overweight", "Obese")
   )
 )
 
-head(StudentSurvey) %>% kable()
+head(StudentBMI) %>% kable()
 ```
 
 ^[Problem 2 Complete]
 
+# Highest and Lowest BMIs
+
+```{r}
+StudentBMI %>% group_by(Sex) %>% 
+  summarize(Low = min(BMI, na.rm = TRUE), High = max(BMI, na.rm = TRUE)) %>% 
+  kable()
+```
+
+^[Problem 3 Complete]
+
+# SAT Scores
+
+```{r}
+StudentSAT <- StudentSurvey %>% 
+  mutate(Higher = case_when(
+    VerbalSAT > MathSAT ~ "Verbal",
+    VerbalSAT < MathSAT ~ "Math",
+    VerbalSAT == MathSAT ~ "Equal"
+  ), .keep = "used")
+
+head(StudentSAT) %>% kable()
+```
+
+^[Problem 4 Complete]
