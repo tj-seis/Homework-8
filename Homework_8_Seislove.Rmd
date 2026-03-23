@@ -8,7 +8,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(tidyverse)
 library(mosaic)
 library(janitor)
@@ -69,3 +69,14 @@ head(StudentSAT) %>% kable()
 ```
 
 ^[Problem 4 Complete]
+
+# SAT Z-Scores
+
+```{r}
+StudentZ <- StudentSurvey %>% 
+  mutate(z_score = (SAT - mean(SAT)) / sd(SAT), .keep = "used")
+
+head(StudentZ) %>% kable()
+```
+
+^[Problem 5 Complete]

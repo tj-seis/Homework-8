@@ -654,6 +654,48 @@ head(StudentSAT) %&gt;% kable()</code></pre>
 </table>
 <p><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 </div>
+<div id="sat-z-scores" class="section level1">
+<h1>SAT Z-Scores</h1>
+<pre class="r"><code>StudentZ &lt;- StudentSurvey %&gt;% 
+  mutate(z_score = (SAT - mean(SAT)) / sd(SAT), .keep = &quot;used&quot;)
+
+head(StudentZ) %&gt;% kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">SAT</th>
+<th align="right">z_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1210</td>
+<td align="right">0.0525450</td>
+</tr>
+<tr class="even">
+<td align="right">1150</td>
+<td align="right">-0.4421567</td>
+</tr>
+<tr class="odd">
+<td align="right">1110</td>
+<td align="right">-0.7719579</td>
+</tr>
+<tr class="even">
+<td align="right">1120</td>
+<td align="right">-0.6895076</td>
+</tr>
+<tr class="odd">
+<td align="right">1170</td>
+<td align="right">-0.2772562</td>
+</tr>
+<tr class="even">
+<td align="right">1150</td>
+<td align="right">-0.4421567</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+</div>
 <div class="footnotes footnotes-end-of-document">
 <hr />
 <ol>
@@ -661,6 +703,7 @@ head(StudentSAT) %&gt;% kable()</code></pre>
 <li id="fn2"><p>Problem 2 Complete<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>Problem 3 Complete<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 <li id="fn4"><p>Problem 4 Complete<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Problem 5 Complete<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
